@@ -81,14 +81,14 @@
                                     <a class="nav-link" href="{{ url('/product') }}">Data Barang</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Data Bahan</a>
+                                    <a class="nav-link" href="{{ url('/item') }}">Data Bahan</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ url('/transaction') }}">
                             <span class="menu-title">Transaksi</span>
                         </a>
                     </li>

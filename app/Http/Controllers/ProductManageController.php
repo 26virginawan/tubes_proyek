@@ -12,6 +12,7 @@ use App\Supply_system;
 use App\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
 
 class ProductManageController extends Controller
 {
@@ -21,7 +22,9 @@ class ProductManageController extends Controller
         $id_account = Auth::id();
         $check_access = Acces::where('user', $id_account)->first();
         if ($check_access->kelola_barang == 1) {
-            $products = Product::all()->sortBy('kode_barang');
+            // $products = DB::table('products')->simplePaginate(15);
+            $products = Product::all()->sortBy('nama_barang');
+
             $supply_system = Supply_system::first();
 
             return view(
@@ -47,24 +50,6 @@ class ProductManageController extends Controller
         }
     }
 
-    // Filter Product Table
-    public function filterTable($id)
-    {
-        $id_account = Auth::id();
-        $check_access = Acces::where('user', $id_account)->first();
-        if ($check_access->kelola_barang == 1) {
-            $supply_system = Supply_system::first();
-            $products = Product::orderBy($id, 'asc')->get();
-
-            return view(
-                'manage_product.filter_table.table_view',
-                compact('products', 'supply_system')
-            );
-        } else {
-            return back();
-        }
-    }
-
     // Create New Product
     public function createProduct(Request $req)
     {
@@ -79,7 +64,7 @@ class ProductManageController extends Controller
 
             if ($check_product == 0) {
                 $product = new Product();
-                $product->kode_barang = $req->kode_barang;
+                $product->kode_barang = substr(md5(mt_rand()), 1, 6);
                 $product->nama_barang = $req->nama_barang;
 
                 if ($supply_system->status == true) {
@@ -101,40 +86,6 @@ class ProductManageController extends Controller
 
                 return back();
             }
-        } else {
-            return back();
-        }
-    }
-
-    // Import New Product
-    public function importProduct(Request $req)
-    {
-        $id_account = Auth::id();
-        $check_access = Acces::where('user', $id_account)->first();
-        if ($check_access->kelola_barang == 1) {
-            try {
-                $file = $req->file('excel_file');
-                $nama_file = rand() . $file->getClientOriginalName();
-                $file->move('excel_file', $nama_file);
-                Excel::import(
-                    new ProductImport(),
-                    public_path('/excel_file/' . $nama_file)
-                );
-
-                Session::flash(
-                    'import_success',
-                    'Data barang berhasil diimport'
-                );
-            } catch (\Exception $ex) {
-                Session::flash(
-                    'import_failed',
-                    'Cek kembali terdapat data kosong atau kode barang yang telah tersedia'
-                );
-
-                return back();
-            }
-
-            return redirect('/product');
         } else {
             return back();
         }

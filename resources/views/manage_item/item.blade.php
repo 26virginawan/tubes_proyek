@@ -6,8 +6,14 @@
 <div class="row page-title-header">
     <div class="col-12">
         <div class="page-header d-flex justify-content-between align-items-center">
-            <h4 class="page-title">Data Barang</h4>
+            <h4 class="page-title">Data Bahan</h4>
             <div class="d-flex justify-content-start">
+                <div class="dropdown">
+                    <button class="btn btn-icons btn-inverse-primary btn-filter shadow-sm" type="button"
+                        id="dropdownMenuIconButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-filter-variant"></i>
+                    </button>
+                </div>
                 <div class="dropdown dropdown-search">
                     <button class="btn btn-icons btn-inverse-primary btn-filter shadow-sm ml-2" type="button"
                         id="dropdownMenuIconButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,12 +22,12 @@
                     <div class="dropdown-menu search-dropdown" aria-labelledby="dropdownMenuIconButton1">
                         <div class="row">
                             <div class="col-11">
-                                <input type="text" class="form-control" name="search" placeholder="Cari barang">
+                                <input type="text" class="form-control" name="search" placeholder="Cari bahan">
                             </div>
                         </div>
                     </div>
                 </div>
-                <a href="{{ url('/product/new') }}" class="btn btn-icons btn-inverse-primary btn-new ml-2">
+                <a href="{{ url('/item/new') }}" class="btn btn-icons btn-inverse-primary btn-new ml-2">
                     <i class="mdi mdi-plus"></i>
                 </a>
             </div>
@@ -33,9 +39,9 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ url('/product/update') }}" method="post" name="update_form">
+                <form action="{{ url('/item/update') }}" method="post" name="update_form">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Barang</h5>
+                        <h5 class="modal-title" id="editModalLabel">Edit Bahan</h5>
                         <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -49,29 +55,49 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Kode
-                                Barang</label>
+                                Bahan</label>
                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                <input type="text" class="form-control" name="kode_barang" readonly>
+                                <input type="text" class="form-control" name="kode_bahan" readonly>
                             </div>
-                            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-2">
-                                <button class="btn btn-inverse-primary btn-sm btn-scan shadow-sm" type="button"><i
-                                        class="mdi mdi-crop-free"></i></button>
-                            </div> -->
-                            <div class="col-lg-9 col-md-9 col-sm-12 offset-lg-3 offset-md-3 error-notice"
-                                id="kode_barang_error"></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Nama
-                                Barang</label>
+                                Bahan</label>
                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                <input type="text" class="form-control" name="nama_barang">
+                                <input type="text" class="form-control" name="nama_bahan">
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-12 offset-lg-3 offset-md-3 error-notice"
                                 id="nama_barang_error"></div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Warna</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div class="input-group-append">
+                                    <select class="form-control" name="warna">
+                                        <option value="Silver">Silver</option>
+                                        <option value="Coklat">Coklat</option>
+                                        <option value="Putih">Putih</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Ukuran</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control number-input input-notzero" name="ukuran">
+                                    <div class="input-group-append">
+                                        <select class="form-control" name="ukuran_bahan">
+                                            <option value="m">Meter</option>
+                                            <option value="cm">Centimeter</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row" @if($supply_system->status == false) hidden="" @endif>
                             <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Stok
-                                Barang</label>
+                                Bahan</label>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="text" class="form-control number-input" name="stok">
                             </div>
@@ -80,7 +106,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-md-3 col-sm-12 col-form-label font-weight-bold">Harga
-                                Barang</label>
+                                Bahan</label>
                             <div class="col-lg-9 col-md-9 col-sm-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -129,8 +155,10 @@
                         <table class="table table-custom">
                             <thead>
                                 <tr>
-                                    <th>Kode Barang</th>
-                                    <th>Nama Barang</th>
+                                    <th>Kode bahan</th>
+                                    <th>Nama bahan</th>
+                                    <th>Warna</th>
+                                    <th>Ukuran</th>
                                     @if($supply_system->status == true)
                                     <th>Stok</th>
                                     @endif
@@ -140,31 +168,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($products as $product)
+                                @foreach($items as $items)
                                 <tr>
-                                    <td>{{ $product->kode_barang }}</td>
-                                    <td>{{ $product->nama_barang }}</td>
-
-                                    <td>{{ $product->stok }}</td>
+                                    <td>{{ $items->kode_bahan }}</td>
+                                    <td>{{ $items->nama_bahan }}</td>
+                                    <td>{{$items->warna}}</td>
+                                    <td>{{ $items->ukuran }}</td>
+                                    <td>{{ $items->stok }}</td>
                                     <td><span class="ammount-box bg-green"><i class="mdi mdi-coin"></i></span>Rp.
-                                        {{ number_format($product->harga,2,',','.') }}</td>
+                                        {{ number_format($items->harga,2,',','.') }}</td>
                                     @if($supply_system->status == true)
                                     <td>
-                                        @if($product->keterangan == 'Tersedia')
-                                        <span class="btn tersedia-span">{{ $product->keterangan }}</span>
+                                        @if($items->keterangan == 'Tersedia')
+                                        <span class="btn tersedia-span">{{ $items->keterangan }}</span>
                                         @else
-                                        <span class="btn habis-span">{{ $product->keterangan }}</span>
+                                        <span class="btn habis-span">{{ $items->keterangan }}</span>
                                         @endif
                                     </td>
                                     @endif
                                     <td>
                                         <button type="button" class="btn btn-edit btn-icons btn-rounded btn-secondary"
-                                            data-toggle="modal" data-target="#editModal" data-edit="{{ $product->id }}">
+                                            data-toggle="modal" data-target="#editModal" data-edit="{{ $items->id }}">
                                             <i class="mdi mdi-pencil"></i>
                                         </button>
                                         <button type="button"
                                             class="btn btn-icons btn-rounded btn-secondary ml-1 btn-delete"
-                                            data-delete="{{ $product->id }}">
+                                            data-delete="{{ $items->id }}">
                                             <i class="mdi mdi-close"></i>
                                         </button>
                                     </td>
@@ -247,13 +276,15 @@ $(document).on('click', '.btn-edit', function() {
     var data_edit = $(this).attr('data-edit');
     $.ajax({
         method: "GET",
-        url: "{{ url('/product/edit') }}/" + data_edit,
+        url: "{{ url('/item/edit') }}/" + data_edit,
         success: function(response) {
-            $('input[name=id]').val(response.product.id);
-            $('input[name=kode_barang]').val(response.product.kode_barang);
-            $('input[name=nama_barang]').val(response.product.nama_barang);
-            $('input[name=stok]').val(response.product.stok);
-            $('input[name=harga]').val(response.product.harga);
+            $('input[name=id]').val(response.items.id);
+            $('input[name=kode_bahan]').val(response.items.kode_bahan);
+            $('input[name=nama_bahan]').val(response.items.nama_bahan);
+            $('input[name=warna]').val(response.items.warna);
+            $('input[name=ukuran]').val(response.items.ukuran);
+            $('input[name=stok]').val(response.items.stok);
+            $('input[name=harga]').val(response.items.harga);
             validator.resetForm();
         }
     });
@@ -271,7 +302,7 @@ $(document).on('click', '.btn-delete', function(e) {
         })
         .then((willDelete) => {
             if (willDelete) {
-                window.open("{{ url('/product/delete') }}/" + data_delete, "_self");
+                window.open("{{ url('/item/delete') }}/" + data_delete, "_self");
             }
         });
 });

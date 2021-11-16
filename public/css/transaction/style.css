@@ -18,7 +18,7 @@
 
 .icon-holder{
 	border-radius: 5px;
-    border: 1px solid #4e55c5;
+    border: 1px solid #2449f0;
     width: 40px;
     height: 40px;
     display: -webkit-box;
@@ -30,13 +30,13 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    background: #2944b5;
+    background: #2449f0;
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .bg-dark-blue .card{
-	background: #030aac;
+	background: #2449f0;
 }
 
 .btn-search{

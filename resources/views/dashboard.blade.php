@@ -7,10 +7,12 @@
     <div class="col-12">
         <div class="page-header d-flex justify-content-between align-items-center">
             <h4 class="page-title">Dashboard</h4>
-            <!-- <button class="setting-btn" data-toggle="modal" data-target="#pengaturanTokoModal">
-                Pengaturan Toko
-            </button> -->
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <h2>Selamat Datang Di Sistem Informasi Inventory</h2>
     </div>
 </div>
 

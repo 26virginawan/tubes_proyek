@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/login', 'AuthManageController@viewLogin')->name('login');
+Route::get('/', 'AuthManageController@viewLogin')->name('login');
 Route::post('/verify_login', 'AuthManageController@verifyLogin');
 Route::post('/first_account', 'UserManageController@firstAccount');
 
@@ -26,7 +26,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
     Route::get('/dashboard', 'ViewManageController@viewDashboard');
     Route::post('/market/update', 'ViewManageController@updateMarket');
     // ------------------------- Fitur Cari -------------------------
-    Route::get('/search/{word}', 'SearchManageController@searchPage');
     // ------------------------- Profil -------------------------
     Route::get('/profile', 'ProfileManageController@viewProfile');
     Route::post('/profile/update/data', 'ProfileManageController@changeData');
@@ -56,6 +55,31 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
     Route::get('/product/edit/{id}', 'ProductManageController@editProduct');
     Route::post('/product/update', 'ProductManageController@updateProduct');
     Route::get('/product/delete/{id}', 'ProductManageController@deleteProduct');
+
+    Route::get('/item', 'ItemManageController@viewItem');
+    Route::get('/item/new', 'ItemManageController@viewNewItem');
+    Route::post('/item/create', 'ItemManageController@createItem');
+    Route::get('/item/edit/{id}', 'ItemManageController@editItem');
+    Route::post('/item/update', 'ItemManageController@updateItem');
+    Route::get('/item/delete/{id}', 'ItemManageController@deleteItem');
+
+    Route::get('/transaction', 'TransactionManageController@viewTransaction');
+    Route::get(
+        '/transaction/product/{id}',
+        'TransactionManageController@transactionProduct'
+    );
+    Route::get(
+        '/transaction/product/check/{id}',
+        'TransactionManageController@transactionProductCheck'
+    );
+    Route::post(
+        '/transaction/process',
+        'TransactionManageController@transactionProcess'
+    );
+    Route::get(
+        '/transaction/receipt/{id}',
+        'TransactionManageController@receiptTransaction'
+    );
 });
 
 // Auth::routes();

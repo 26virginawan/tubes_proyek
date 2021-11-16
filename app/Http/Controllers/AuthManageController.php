@@ -12,28 +12,27 @@ class AuthManageController extends Controller
     // Show View Login
     public function viewLogin()
     {
-    	$users = User::all()
-    	->count();
+        $users = User::all()->count();
 
-    	return view('login', compact('users'));
+        return view('login', compact('users'));
     }
 
     // Verify Login
     public function verifyLogin(Request $request)
     {
-    	if(Auth::attempt($request->only('username', 'password'))){
-    		return redirect('/dashboard');
-    	}
-    	Session::flash('login_failed', 'Username atau password salah');
-    	
-    	return redirect('/login');
+        if (Auth::attempt($request->only('username', 'password'))) {
+            return redirect('/dashboard');
+        }
+        Session::flash('login_failed', 'Username atau password salah');
+
+        return redirect('/login');
     }
 
     // Logout Process
     public function logoutProcess()
     {
-    	Auth::logout();
+        Auth::logout();
 
-    	return redirect('/login');
+        return redirect('/');
     }
 }
