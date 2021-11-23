@@ -9,10 +9,10 @@
             <h4 class="page-title">Data Bahan</h4>
             <div class="d-flex justify-content-start">
                 <div class="dropdown">
-                    <button class="btn btn-icons btn-inverse-primary btn-filter shadow-sm" type="button"
+                    <!--<button class="btn btn-icons btn-inverse-primary btn-filter shadow-sm" type="button"
                         id="dropdownMenuIconButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="mdi mdi-filter-variant"></i>
-                    </button>
+                    </button>-->
                 </div>
                 <div class="dropdown dropdown-search">
                     <button class="btn btn-icons btn-inverse-primary btn-filter shadow-sm ml-2" type="button"

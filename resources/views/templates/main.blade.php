@@ -46,7 +46,7 @@
                                 <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->nama }}</p>
                                 <p class="font-weight-light text-muted mb-0">{{ auth()->user()->email }}</p>
                             </div>
-                            <a href="{{ url('/profile') }}" class="dropdown-item">Profil</a>
+                           <!-- <a href="{{ url('/profile') }}" class="dropdown-item">Profil</a> -->
                             <a href="{{ url('/logout') }}" class="dropdown-item">Sign Out</a>
                         </div>
                     </li>
@@ -103,7 +103,7 @@
                         <div class="collapse" id="kelola_laporan">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Laporan Transaksi</a>
+                                    <a class="nav-link" href="{{ url('/report/transaction') }}">Laporan Transaksi</a>
                                 </li>
                             </ul>
                         </div>

@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
         '/transaction/receipt/{id}',
         'TransactionManageController@receiptTransaction'
     );
+    Route::get('/report/transaction','ReportManageController@reportTransaction');
 });
-
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');

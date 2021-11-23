@@ -15,6 +15,7 @@ class Transaction extends Model
         'jumlah',
         'total_barang',
         'subtotal',
+        'diskon',
         'total',
         'bayar',
         'kembali',

@@ -101,6 +101,7 @@ class TransactionManageController extends Controller
             $transaction->jumlah = $req->jumlah_barang[$i];
             $transaction->total_barang = $req->total_barang[$i];
             $transaction->subtotal = $req->subtotal;
+            $transaction->diskon = $req->diskon;
             $transaction->total = $req->total;
             $transaction->bayar = $req->bayar;
             $transaction->kembali = $req->bayar - $req->total;
