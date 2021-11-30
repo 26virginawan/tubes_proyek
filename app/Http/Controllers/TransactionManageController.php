@@ -97,6 +97,9 @@ class TransactionManageController extends Controller
                 $req->kode_barang[$i]
             )->first();
             $transaction->nama_barang = $product_data->nama_barang;
+            $transaction->kategori = $product_data->kategori;
+            $transaction->warna = $product_data->warna;
+            $transaction->ukuran = $product_data->ukuran;
             $transaction->harga = $product_data->harga;
             $transaction->jumlah = $req->jumlah_barang[$i];
             $transaction->total_barang = $req->total_barang[$i];

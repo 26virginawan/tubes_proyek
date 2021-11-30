@@ -6,7 +6,7 @@
 <div class="row page-title-header">
     <div class="col-12">
         <div class="page-header d-flex justify-content-start align-items-center">
-            <h4 class="page-title">Daftar Barang</h4>
+            <h4 class="page-title">Daftar Item</h4>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tableModalLabel">Daftar Barang</h5>
+                    <h5 class="modal-title" id="tableModalLabel">Daftar Item</h5>
                     <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -43,9 +43,10 @@
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center active-list">
                                     <div class="text-group">
-                                        <p class="m-0">{{ $product->kode_barang }}</p>
-                                        <p class="m-0 txt-light">{{ $product->nama_barang }}</p>
+                                        <p class="m-0 txt-light">{{ $product->kode_barang }}</p>
+                                        <p class="m-0 ">{{ $product->nama_barang }}</p>
                                     </div>
+
                                     <div class="d-flex align-items-center">
                                         <span class="ammount-box bg-secondary mr-1"><i
                                                 class="mdi mdi-cube-outline"></i></span>
@@ -63,6 +64,16 @@
                                         <p class="m-0">{{ $product->kode_barang }}</p>
                                         <p class="m-0 txt-light">{{ $product->nama_barang }}</p>
                                     </div>
+                                    <div class="text-group">
+                                        <p class="m-0">{{ $product->kategori }}</p>
+                                    </div>
+                                    <div class="text-group">
+                                        <p class="m-0">{{ $product->warna }}</p>
+                                    </div>
+                                    <div class="text-group">
+                                        <p class="m-0">{{ $product->ukuran }}</p>
+                                    </div>
+
                                     <div class="d-flex align-items-center">
                                         <span class="ammount-box bg-green mr-1"><i class="mdi mdi-coin"></i></span>
                                         <p class="m-0">Rp. {{ number_format($product->harga,2,',','.') }}</p>
@@ -110,10 +121,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <!-- <td>
-                                        <span class="d-block little-td">Kasir</span>
-                                        <span class="d-block font-weight-bold">{{ $transaksi->kasir }}</span>
-                                    </td> -->
                                     <td>
                                         <span class="d-block little-td">Total</span>
                                         <span class="d-block font-weight-bold text-success">Rp.
@@ -214,10 +221,6 @@
                                     <td class="text-left">Waktu</td>
                                     <td class="text-right">{{ date('H:i') }}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <td class="text-left">Kasir</td>
-                                    <td class="text-right">{{ auth()->user()->nama }}</td>
-                                </tr> -->
                             </table>
                         </div>
                         <div class="col-12 mt-4">
@@ -312,6 +315,46 @@ $(document).on('click', '.btn-pilih', function(e) {
     });
 });
 
+function startScan() {
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#area-scan')
+        },
+        decoder: {
+            readers: ["ean_reader"],
+            multiple: false
+        },
+        locate: false
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        console.log("Initialization finished. Ready to start");
+        Quagga.start();
+    });
+
+    Quagga.onDetected(function(data) {
+        $('#area-scan').prop('hidden', true);
+        $('#btn-scan-action').prop('hidden', false);
+        $('.barcode-result').prop('hidden', false);
+        $('.barcode-result-text').html(data.codeResult.code);
+        $('.kode_barang_error').prop('hidden', true);
+        stopScan();
+    });
+}
+
+$(document).on('click', '.btn-scan', function() {
+    $('#area-scan').prop('hidden', false);
+    $('#btn-scan-action').prop('hidden', true);
+    $('.barcode-result').prop('hidden', true);
+    $('.barcode-result-text').html('');
+    $('.kode_barang_error').prop('hidden', true);
+    startScan();
+});
+
 $(document).on('click', '.btn-repeat', function() {
     $('#area-scan').prop('hidden', false);
     $('#btn-scan-action').prop('hidden', true);
@@ -355,8 +398,11 @@ $(document).on('click', '.btn-bayar', function() {
     if (bayar >= total) {
         $('.nominal-error').prop('hidden', true);
         if (check_barang != 0) {
-            $('#transaction_form').submit();
-
+            if ($('.diskon-input').attr('hidden') != 'hidden') {
+                $('.diskon-input').addClass('is-invalid');
+            } else {
+                $('#transaction_form').submit();
+            }
         } else {
             swal(
                 "",

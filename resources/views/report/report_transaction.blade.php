@@ -22,6 +22,94 @@
         </div>
     </div>
 </div>
+<div class="row modal-group">
+    <div class="modal fade" id="cetakModal" tabindex="-1" role="dialog" aria-labelledby="cetakModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cetakModalLabel">Export Laporan</h5>
+                    <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/report/transaction/export') }}" name="export_form" method="POST"
+                        target="_blank">
+                        @csrf
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-5 border rounded-left offset-col-1">
+                                        <div class="form-radio">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="jns_laporan"
+                                                    value="period" checked> Periode</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 border rounded-right">
+                                        <div class="form-radio">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="jns_laporan"
+                                                    value="manual"> Manual</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 period-form">
+                                <div class="form-group row">
+                                    <div class="col-10 p-0 offset-col-1">
+                                        <p>Pilih waktu dan periode</p>
+                                    </div>
+                                    <div class="col-4 p-0 offset-col-1">
+                                        <input type="number"
+                                            class="form-control form-control-lg time-input number-input dis-backspace input-notzero"
+                                            name="time" value="1" min="1" max="4">
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <select class="form-control form-control-lg period-select" name="period">
+                                            <option value="minggu" selected="">Minggu</option>
+                                            <option value="bulan">Bulan</option>
+                                            <option value="tahun">Tahun</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 manual-form" hidden="">
+                                <div class="form-group row">
+                                    <div class="col-10 p-0 offset-col-1">
+                                        <p>Pilih tanggal awal dan akhir</p>
+                                    </div>
+                                    <div class="col-10 p-0 offset-col-1 input-group mb-2">
+                                        <input type="text" name="tgl_awal_export"
+                                            class="form-control form-control-lg date" placeholder="Tanggal awal">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <i class="mdi mdi-calendar calendar-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 p-0 offset-col-1 input-group">
+                                        <input type="text" name="tgl_akhir_export"
+                                            class="form-control form-control-lg date" placeholder="Tanggal akhir">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <i class="mdi mdi-calendar calendar-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-export">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
 

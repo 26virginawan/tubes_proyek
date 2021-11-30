@@ -8,8 +8,8 @@
         <div class="page-header d-flex justify-content-start align-items-center">
             <div class="quick-link-wrapper d-md-flex flex-md-wrap">
                 <ul class="quick-links">
-                    <li><a href="{{ url('product') }}">Daftar Barang</a></li>
-                    <li><a href="{{ url('product/new') }}">Barang Baru</a></li>
+                    <li><a href="{{ url('product') }}">Daftar Item</a></li>
+                    <li><a href="{{ url('product/new') }}">Item Baru</a></li>
                 </ul>
             </div>
         </div>
@@ -24,13 +24,60 @@
                     <div class="form-group row">
                         <div class="col-lg-11 col-md-6 col-sm-12 space-bottom">
                             <div class="row">
-                                <label class="col-12 font-weight-bold col-form-label">Nama Barang <span
+                                <label class="col-12 font-weight-bold col-form-label">Nama Item <span
                                         class="text-danger">*</span></label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" name="nama_barang"
-                                        placeholder="Masukkan Nama Barang">
+                                        placeholder="Masukkan Nama Item">
                                 </div>
                                 <div class="col-12 error-notice" id="nama_barang_error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-8 col-md-6 col-sm-12 space-bottom">
+                            <div class="row">
+                                <label class="col-12 font-weight-bold col-form-label">Kategori</label>
+                                <div class="col-12">
+
+                                    <div class="input-group-append">
+                                        <select class="form-control" name="kategori">
+                                            <option value="Barang">Barang</option>
+                                            <option value="Bahan">Bahan</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-8 col-md-6 col-sm-12 space-bottom">
+                            <div class="row">
+                                <label class="col-12 font-weight-bold col-form-label">Warna</label>
+                                <div class="col-12">
+
+                                    <div class="input-group-append">
+                                        <select class="form-control" name="warna">
+                                            <option value="Silver">Silver</option>
+                                            <option value="Coklat">Coklat</option>
+                                            <option value="Putih">Putih</option>
+                                            <option value="Hitam">Hitam</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-11 col-md-6 col-sm-12 space-bottom">
+                            <div class="row">
+                                <label class="col-12 font-weight-bold col-form-label">Ukuran </label>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" name="ukuran"
+                                        placeholder="Masukkan Ukuran Item">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,11 +85,11 @@
                         @if($supply_system->status == true)
                         <div class="col-lg-11 col-md-6 col-sm-12 space-bottom">
                             <div class="row">
-                                <label class="col-12 font-weight-bold col-form-label">Stok Barang <span
+                                <label class="col-12 font-weight-bold col-form-label">Stok Item <span
                                         class="text-danger">*</span></label>
                                 <div class="col-12">
                                     <input type="text" class="form-control number-input" name="stok"
-                                        placeholder="Masukkan Stok Barang">
+                                        placeholder="Masukkan Stok Item">
                                 </div>
                                 <div class="col-12 error-notice" id="stok_error"></div>
                             </div>
@@ -52,7 +99,7 @@
                     <div class="form-group row">
                         <div class="col-lg-11 col-md-6 col-sm-12">
                             <div class="row">
-                                <label class="col-12 font-weight-bold col-form-label">Harga Barang <span
+                                <label class="col-12 font-weight-bold col-form-label">Harga Item <span
                                         class="text-danger">*</span></label>
                                 <div class="col-12">
                                     <div class="input-group">
@@ -60,7 +107,7 @@
                                             <span class="input-group-text">Rp. </span>
                                         </div>
                                         <input type="text" class="form-control number-input" name="harga"
-                                            placeholder="Masukkan Harga Barang">
+                                            placeholder="Masukkan Harga Item">
                                     </div>
                                 </div>
                                 <div class="col-12 error-notice" id="harga_error"></div>

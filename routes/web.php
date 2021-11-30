@@ -56,12 +56,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
     Route::post('/product/update', 'ProductManageController@updateProduct');
     Route::get('/product/delete/{id}', 'ProductManageController@deleteProduct');
 
-    Route::get('/item', 'ItemManageController@viewItem');
-    Route::get('/item/new', 'ItemManageController@viewNewItem');
-    Route::post('/item/create', 'ItemManageController@createItem');
-    Route::get('/item/edit/{id}', 'ItemManageController@editItem');
-    Route::post('/item/update', 'ItemManageController@updateItem');
-    Route::get('/item/delete/{id}', 'ItemManageController@deleteItem');
 
     Route::get('/transaction', 'TransactionManageController@viewTransaction');
     Route::get(
@@ -80,7 +74,22 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
         '/transaction/receipt/{id}',
         'TransactionManageController@receiptTransaction'
     );
-    Route::get('/report/transaction','ReportManageController@reportTransaction');
+    Route::get(
+        '/report/transaction',
+        'ReportManageController@reportTransaction'
+    );
+    Route::post(
+        '/report/transaction/filter',
+        'ReportManageController@filterTransaction'
+    );
+    Route::get(
+        '/report/transaction/chart/{id}',
+        'ReportManageController@chartTransaction'
+    );
+    Route::post(
+        '/report/transaction/export',
+        'ReportManageController@exportTransaction'
+    );
 });
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');

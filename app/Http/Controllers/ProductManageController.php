@@ -66,6 +66,9 @@ class ProductManageController extends Controller
                 $product = new Product();
                 $product->kode_barang = substr(md5(mt_rand()), 1, 6);
                 $product->nama_barang = $req->nama_barang;
+                $product->kategori = $req->kategori;
+                $product->warna = $req->warna;
+                $product->ukuran = $req->ukuran;
 
                 if ($supply_system->status == true) {
                     $product->stok = $req->stok;
@@ -77,12 +80,12 @@ class ProductManageController extends Controller
 
                 Session::flash(
                     'create_success',
-                    'Barang baru berhasil ditambahkan'
+                    'Item baru berhasil ditambahkan'
                 );
 
                 return redirect('/product');
             } else {
-                Session::flash('create_failed', 'Kode barang telah digunakan');
+                Session::flash('create_failed', 'Kode Item telah digunakan');
 
                 return back();
             }
@@ -125,6 +128,9 @@ class ProductManageController extends Controller
                 $product->kode_barang = $req->kode_barang;
 
                 $product->nama_barang = $req->nama_barang;
+                $product->kategori = $req->kategori;
+                $product->warna = $req->warna;
+                $product->ukuran = $req->ukuran;
 
                 $product->stok = $req->stok;
                 $product->harga = $req->harga;
@@ -142,7 +148,7 @@ class ProductManageController extends Controller
                     'kode_barang' => $req->kode_barang,
                 ]);
 
-                Session::flash('update_success', 'Data barang berhasil diubah');
+                Session::flash('update_success', 'Data Item berhasil diubah');
 
                 return redirect('/product');
             } else {
@@ -163,7 +169,7 @@ class ProductManageController extends Controller
         if ($check_access->kelola_barang == 1) {
             Product::destroy($id);
 
-            Session::flash('delete_success', 'Barang berhasil dihapus');
+            Session::flash('delete_success', 'Item berhasil dihapus');
 
             return back();
         } else {
