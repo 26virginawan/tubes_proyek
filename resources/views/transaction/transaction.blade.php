@@ -43,8 +43,10 @@
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center active-list">
                                     <div class="text-group">
-                                        <p class="m-0 txt-light">{{ $product->kode_barang }}</p>
-                                        <p class="m-0 ">{{ $product->nama_barang }}</p>
+                                        <p class="m-0 txt-light">{{ $product->kode_barang}}</p>
+                                        <p class="m-0 ">
+                                            {{ $product->nama_barang ."-" . $product->kategori . "-" . $product->warna}}
+                                        </p>
                                     </div>
 
                                     <div class="d-flex align-items-center">
@@ -62,18 +64,9 @@
                                     class="list-group-item d-flex justify-content-between align-items-center active-list">
                                     <div class="text-group">
                                         <p class="m-0">{{ $product->kode_barang }}</p>
-                                        <p class="m-0 txt-light">{{ $product->nama_barang }}</p>
+                                        <p {{ $product->nama_barang ."-" . $product->kategori . "-" . $product->warna}}
+                                            </p>
                                     </div>
-                                    <div class="text-group">
-                                        <p class="m-0">{{ $product->kategori }}</p>
-                                    </div>
-                                    <div class="text-group">
-                                        <p class="m-0">{{ $product->warna }}</p>
-                                    </div>
-                                    <div class="text-group">
-                                        <p class="m-0">{{ $product->ukuran }}</p>
-                                    </div>
-
                                     <div class="d-flex align-items-center">
                                         <span class="ammount-box bg-green mr-1"><i class="mdi mdi-coin"></i></span>
                                         <p class="m-0">Rp. {{ number_format($product->harga,2,',','.') }}</p>
@@ -303,6 +296,9 @@ $(document).on('click', '.btn-pilih', function(e) {
             var check = $('.kode-barang-td:contains(' + response.product.kode_barang + ')').length;
             if (check == 0) {
                 tambahData(response.product.kode_barang, response.product.nama_barang, response
+                    .product.kategori, response
+                    .product.warna, response
+                    .product.ukuran, response
                     .product.harga, response.product.stok, response.status);
             } else {
                 swal(
@@ -375,7 +371,9 @@ $(document).on('click', '.btn-continue', function(e) {
             if (response.check == 'tersedia') {
                 if (check == 0) {
                     tambahData(response.product.kode_barang, response.product.nama_barang, response
-                        .product.harga, response.product.stok, response.status);
+                        .product.kategori, response.product.warna, response.product.ukuran,
+                        response.product.warna, response.product.ukuran, response.product.harga,
+                        response.product.stok, response.status);
                     $('.close-btn').click();
                 } else {
                     swal(

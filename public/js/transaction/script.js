@@ -73,7 +73,7 @@ function jumlahBarang() {
   $('.jml-barang-td').html(jumlah_barang + ' Barang')
 }
 
-function tambahData(kode, nama, harga, stok, status) {
+function tambahData(kode, nama, kategori, warna, ukuran, harga, stok, status) {
   var tambah_data =
     '<tr><td><input type="text" name="kode_barang[]" hidden="" value="' +
     kode +
@@ -81,6 +81,20 @@ function tambahData(kode, nama, harga, stok, status) {
     nama +
     '</span><span class="kode-barang-td">' +
     kode +
+    '<td><span class="nama-barang-td">' +
+    kategori +
+    '<td><span class="nama-barang-td">' +
+    warna +
+    '<td><span class="nama-barang-td">' +
+    ukuran +
+    // '<td><input type="text" name="kode_barang[]" hidden="" value="' +
+    // kode +
+    // '"><span class="nama-barang-td">' +
+    // warna +
+    // '<td><input type="text" name="kode_barang[]" hidden="" value="' +
+    // kode +
+    // '"><span class="nama-barang-td">' +
+    // ukuran +
     '</span></td><td><input type="text" name="harga_barang[]" hidden="" value="' +
     harga +
     '"><span>Rp. ' +

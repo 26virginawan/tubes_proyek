@@ -109,19 +109,25 @@
         <table class="w-100">
             <thead>
                 <tr>
-                    <td>Nama Barang</td>
+                    <td>Nama Item</td>
+                    <td>Kategori</td>
+                    <td>Warna</td>
+                    <td>Ukuran</td>
                     <td>Qty</td>
                     <td>Harga</td>
                     <td>Jumlah</td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="line"></td>
+                    <td colspan="7" class="line"></td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($transactions as $transaksi)
                 <tr>
                     <td>{{ $transaksi->nama_barang }}</td>
+                    <td>{{ $transaksi->kategori }}</td>
+                    <td>{{ $transaksi->warna }}</td>
+                    <td>{{ $transaksi->ukuran }}</td>
                     <td>{{ $transaksi->jumlah }}</td>
                     <td>{{ number_format($transaksi->harga,2,',','.') }}</td>
                     <td>{{ number_format($transaksi->total_barang,2,',','.') }}</td>
