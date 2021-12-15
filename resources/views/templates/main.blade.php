@@ -80,9 +80,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/product') }}">Data Item</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pasok Item</a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </li>
